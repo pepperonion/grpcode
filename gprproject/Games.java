@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,6 +36,7 @@ public class Games implements Serializable {
     @Column(name="genre")
     private String genre;
     
+    @Temporal(TemporalType.DATE)
     @Column(name="date")
     private Date date;
     
@@ -54,8 +57,8 @@ public class Games implements Serializable {
         this.id = id;
     }
 
-    public Games(Long id, String title, String genre, Date date, String company) {
-        this.id = id;
+    public Games( String title, String genre, Date date, String company) {
+
         this.title = title;
         this.genre = genre;
         this.date = date;

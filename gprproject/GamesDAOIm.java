@@ -49,6 +49,16 @@ public class GamesDAOIm implements GamesDAO {
 
     @Override
     public void addNewGame(String title, String genre, Date date, String company) {
+                
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        
+        EntityManager em = factory.createEntityManager();
+        
+        Games ngame = new Games(title, genre, date, company);
+        em.persist(ngame);
+        
+        em.close();
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

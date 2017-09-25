@@ -16,10 +16,14 @@
  */
 package com.sp.gprproject;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
@@ -28,7 +32,7 @@ import javax.ws.rs.Produces;
  */
 @Path("/Games")
 @Stateless
-public class GamesService {
+public class GamesService implements Serializable{
     
     GamesDAOIm GamesObj = new GamesDAOIm();
 
@@ -37,5 +41,14 @@ public class GamesService {
     public List<Games> getLOG(){
         List<Games> LOGdata = GamesObj.getListOfGames();
         return LOGdata;
+    }
+    
+    @PUT
+    @Path("/newGame/{par1}/{par2}/{par3}/{par4}")
+    public void addGameToList(@PathParam("par1") String titlePar,
+            @PathParam("par2") String genrePar,
+            @PathParam("par3") Date datePar,
+            @PathParam("par4") String companyPar){
+        GamesObj.addNewGame(titlePar, genrePar, datePar, companyPar);
     }
 }
