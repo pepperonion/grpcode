@@ -44,7 +44,17 @@ public class GamesDAOIm implements GamesDAO {
 
     @Override
     public void deleteGame(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        EntityManager em = factory.createEntityManager();
+        
+        //em.getTransaction().begin();
+        
+        em.createQuery("DELETE FROM Games e WHERE e.id = :v")
+                .setParameter("v", id)
+                .executeUpdate();
+        //em.getTransaction().commit();
+        em.close();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

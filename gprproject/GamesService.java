@@ -20,7 +20,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -43,12 +45,27 @@ public class GamesService implements Serializable{
         return LOGdata;
     }
     
-    @PUT
+    @POST
     @Path("/newGame/{par1}/{par2}/{par3}/{par4}")
     public void addGameToList(@PathParam("par1") String titlePar,
             @PathParam("par2") String genrePar,
             @PathParam("par3") Date datePar,
             @PathParam("par4") String companyPar){
         GamesObj.addNewGame(titlePar, genrePar, datePar, companyPar);
+    }
+    
+    @PUT
+    @Path("/updateGame/{par1}/{par2}/{par3}/{par4}/{par5}")
+    public void updateGameInList(@PathParam("par1") int idPar,@PathParam("par2") String titlePar,
+            @PathParam("par3") String genrePar,
+            @PathParam("par4") Date datePar,
+            @PathParam("par5") String companyPar){
+    
+    }
+    
+    @DELETE
+    @Path("/deleteGame/{par1}")
+    public void deleteGameFromList(@PathParam("par1") int idPar){
+        GamesObj.deleteGame(idPar);
     }
 }
