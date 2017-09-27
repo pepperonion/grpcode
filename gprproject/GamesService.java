@@ -17,6 +17,8 @@
 package com.sp.gprproject;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -49,9 +51,13 @@ public class GamesService implements Serializable{
     @Path("/newGame/{par1}/{par2}/{par3}/{par4}")
     public void addGameToList(@PathParam("par1") String titlePar,
             @PathParam("par2") String genrePar,
-            @PathParam("par3") Date datePar,
+            @PathParam("par3") String datePar,
             @PathParam("par4") String companyPar){
-        GamesObj.addNewGame(titlePar, genrePar, datePar, companyPar);
+        
+        DateTimeFormatter frmt = DateTimeFormatter.ofPattern("dd MM yyyy");
+        LocalDate dateObj = LocalDate.parse(datePar, frmt);
+        Date dateNObj = java.sql.Date.valueOf(dateObj);
+        GamesObj.addNewGame(titlePar, genrePar, dateNObj, companyPar);
     }
     
     @PUT

@@ -89,6 +89,7 @@ public class Games implements Serializable {
         this.date = date;
     }
 
+
     public Integer getRank() {
         return rank;
     }
