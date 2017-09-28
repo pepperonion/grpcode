@@ -38,8 +38,19 @@ public class GamesDAOIm implements GamesDAO {
     }
 
     @Override
-    public void updateListOfGames(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateListOfGames(int id, String title, String genre, Date date, String company) {
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        EntityManager em = factory.createEntityManager();
+        
+        em.createQuery("UPDATE Games g SET g.title=:tpar, g.genre=:gpar, g.date=:dpar, g.company=:cpar WHERE g.id=:idpar")
+                .setParameter("tpar", title)
+                .setParameter("gpar", genre)
+                .setParameter("dpar", date)
+                .setParameter("cpar", company)
+                .setParameter("idpar", id)
+                .executeUpdate();
+        em.close();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -73,8 +84,16 @@ public class GamesDAOIm implements GamesDAO {
     }
 
     @Override
-    public Games findGame(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Games> findGame(int id) {
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        
+        EntityManager em = factory.createEntityManager();
+        
+        List<Games> g1 = em.createQuery("SELECT g FROM Games g WHERE g.id=:idpar")
+                .setParameter("idpar", id)
+                .getResultList();
+        return g1;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

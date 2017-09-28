@@ -47,6 +47,14 @@ public class GamesService implements Serializable{
         return LOGdata;
     }
     
+    @GET
+    @Produces("application/json")
+    @Path("/findGame/{par1}")
+    public List<Games> getGame(@PathParam("par1") int idPar){
+        List<Games> gamesFound = GamesObj.findGame(idPar);
+        return gamesFound;
+    }
+    
     @POST
     @Path("/newGame/{par1}/{par2}/{par3}/{par4}")
     public void addGameToList(@PathParam("par1") String titlePar,
@@ -54,7 +62,7 @@ public class GamesService implements Serializable{
             @PathParam("par3") String datePar,
             @PathParam("par4") String companyPar){
         
-        DateTimeFormatter frmt = DateTimeFormatter.ofPattern("dd MM yyyy");
+        DateTimeFormatter frmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate dateObj = LocalDate.parse(datePar, frmt);
         Date dateNObj = java.sql.Date.valueOf(dateObj);
         GamesObj.addNewGame(titlePar, genrePar, dateNObj, companyPar);
@@ -64,8 +72,14 @@ public class GamesService implements Serializable{
     @Path("/updateGame/{par1}/{par2}/{par3}/{par4}/{par5}")
     public void updateGameInList(@PathParam("par1") int idPar,@PathParam("par2") String titlePar,
             @PathParam("par3") String genrePar,
-            @PathParam("par4") Date datePar,
+            @PathParam("par4") String datePar,
             @PathParam("par5") String companyPar){
+        
+            DateTimeFormatter frmt = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate dateObj = LocalDate.parse(datePar, frmt);
+            Date dateNObj = java.sql.Date.valueOf(dateObj);
+            
+            GamesObj.updateListOfGames(idPar, titlePar, genrePar, dateNObj, companyPar);
     
     }
     

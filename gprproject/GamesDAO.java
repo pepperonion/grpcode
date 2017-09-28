@@ -16,12 +16,12 @@ public interface GamesDAO {
 
     public List<Games> getListOfGames();
     
-    public void updateListOfGames(int id);
+    public void updateListOfGames(int id, String title, String genre, Date date, String company);
     
     public void deleteGame(int id);
     
     public void addNewGame(String title, String genre, Date date, String company);
     
-    public Games findGame(int id);
+    public List<Games> findGame(int id);
     
 }
