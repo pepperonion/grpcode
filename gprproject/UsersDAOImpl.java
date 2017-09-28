@@ -76,10 +76,11 @@ public class UsersDAOImpl implements UsersDAO {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
 
-        em.createQuery("UPDATE Users u SET u.username =:userPar, u.passwrd=:passPar, u.email=:emailPar")
+        em.createQuery("UPDATE Users u SET u.username =:userPar, u.passwrd=:passPar, u.email=:emailPar WHERE u.id=:idPar")
                 .setParameter("userPar",username)
                 .setParameter("passPar", pass)
                 .setParameter("emailPar", email)
+                .setParameter("idPar", id)
                 .executeUpdate();
         
         em.close();

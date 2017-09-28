@@ -46,7 +46,7 @@ public class UsersService implements Serializable{
     @POST
     @Path("/newUser/{par1}/{par2}/{par3}")
     public void addNewUser(@PathParam("par1") String username, @PathParam("par2") String password, @PathParam("par3") String email) {
-        usersObj.addUser(username, email, email);
+        usersObj.addUser(username, password, email);
     }
     
     @PUT
