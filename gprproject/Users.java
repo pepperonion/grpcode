@@ -54,6 +54,8 @@ public class Users implements Serializable {
     message = "{invalid.email}")//ensure the email address is valid
     private String email;
     
+    @OneToMany
+    private Reviews reviews;
 
     public Users(String usrname, String passwrd, String email) {
         this.username = usrname;

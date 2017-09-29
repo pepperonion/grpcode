@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -36,9 +37,11 @@ public class Reviews implements Serializable {
     private Long id;
     private String text;
     @ManyToOne
+    @JoinColumn(name="UserTbl_idUserTbl", nullable=false, updatable=false)
     private Users usrId;
     
     @ManyToOne
+    @JoinColumn(name="GamesTbl_idGamesTbl", nullable=false, updatable=false)
     private Games gameId;
 
     public String getText() {
