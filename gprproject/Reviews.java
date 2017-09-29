@@ -34,8 +34,8 @@ public class Reviews implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String text;
-    private int usrId;
-    private int gameId;
+    private Users usrId;
+    private Games gameId;
 
     public String getText() {
         return text;
@@ -45,21 +45,22 @@ public class Reviews implements Serializable {
         this.text = text;
     }
 
-    public int getUsrId() {
+    public Users getUsrId() {
         return usrId;
     }
 
-    public void setUsrId(int usrId) {
+    public void setUsrId(Users usrId) {
         this.usrId = usrId;
     }
 
-    public int getGameId() {
+    public Games getGameId() {
         return gameId;
     }
 
-    public void setGameId(int gameId) {
+    public void setGameId(Games gameId) {
         this.gameId = gameId;
     }
+
     
     
     public Long getId() {

@@ -12,9 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Past;
 
 /**
  *
@@ -36,6 +38,7 @@ public class Games implements Serializable {
     @Column(name="genre")
     private String genre;
     
+    @Past// the release date of the game has to be a past date
     @Temporal(TemporalType.DATE)
     @Column(name="date")
     private Date date;
@@ -45,6 +48,9 @@ public class Games implements Serializable {
     
     @Column(name="company")
     private String company;
+    
+    @OneToMany
+    private Reviews reviews;
 
     public Games() {
     }

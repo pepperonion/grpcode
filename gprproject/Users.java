@@ -22,7 +22,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -45,7 +47,15 @@ public class Users implements Serializable {
     private String passwrd;
     
     @Column(name="emailaddr")
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+    + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+    + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9]"
+    + "(?:[a-z0-9-]*[a-z0-9])?",
+    message = "{invalid.email}")//ensure the email address is valid
     private String email;
+    
+    @OneToMany
+    private Reviews reviews;
 
     public Users(String usrname, String passwrd, String email) {
         this.username = usrname;
