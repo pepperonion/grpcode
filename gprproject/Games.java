@@ -49,9 +49,6 @@ public class Games implements Serializable {
     @Column(name="company")
     private String company;
     
-    @OneToMany
-    private Reviews reviews;
-
     public Games() {
     }
     

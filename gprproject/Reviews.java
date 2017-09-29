@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -34,7 +35,10 @@ public class Reviews implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String text;
+    @ManyToOne
     private Users usrId;
+    
+    @ManyToOne
     private Games gameId;
 
     public String getText() {
