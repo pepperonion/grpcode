@@ -31,7 +31,7 @@ public interface ReviewsDAO {
     
     public List<Reviews> getReviewsByGameId(int gameId); // find all the reviews abou a specific game
     
-    public void addReview(String text, int userId, int gameId);
+    public void addReview(String text, Users userId, Games gameId);
     
     public void deleteReview(int id);
     

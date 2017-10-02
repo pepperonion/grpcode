@@ -39,7 +39,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
         
         List<Reviews> reslist = em.createQuery("SELECT r FROM Reviews r")
                 .getResultList();
-        
+        em.close();
         return reslist;
     }
 
@@ -52,33 +52,76 @@ public class ReviewsDAOImpl implements ReviewsDAO {
         Reviews result = (Reviews)em.createQuery("SELECT r FROM Reviews r WHERE r.id=:idpar")
                 .setParameter("idpar", rId)
                 .getSingleResult();
-        
+        em.close();
         return result;
     }
 
     @Override
     public List<Reviews> getReviewsByUserID(int usrId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        EntityManager em = factory.createEntityManager();
+        
+        List<Reviews> reslist = em.createQuery("SELECT r FROM Reviews r WHERE r.usrId=:usrId")
+                .setParameter("usrId", usrId)
+                .getResultList();
+        em.close();
+        return reslist;
+
+    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<Reviews> getReviewsByGameId(int gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        EntityManager em = factory.createEntityManager();
+        
+        List<Reviews> reslist = em.createQuery("SELECT r FROM Reviews r WHERE r.gameId=:gameId")
+                .setParameter("gameId", gameId)
+                .getResultList();
+        em.close();
+        return reslist;
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void addReview(String text, int userId, int gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addReview(String text, Users userId, Games gameId) {
+        
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        EntityManager em = factory.createEntityManager();
+        
+        Reviews nRev = new Reviews(text, userId, gameId);
+        
+        em.persist(nRev);
+        em.close();
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void deleteReview(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        EntityManager em = factory.createEntityManager();
+        
+        em.createQuery("DELETE FROM Reviews r WHERE r.id=:idPar")
+                .setParameter("idPar", id)
+                .executeUpdate();
+        em.close();
     }
 
     @Override
     public void updateReview(int id, String text, int gameId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
+        EntityManager em = factory.createEntityManager();
+        
+        em.createQuery("UPDATE Reviews r SET r.text=:textPar, r.gameId=:gameIdPar WHERE r.id=:idPar")
+                .setParameter("textPar", text)
+                .setParameter("gameIdPar", gameId)
+                .setParameter("idPar", id)
+                .executeUpdate();
+        em.close();
     }
     
 }
