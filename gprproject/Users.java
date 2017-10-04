@@ -56,6 +56,8 @@ public class Users implements Serializable {
     
     @OneToMany
     private Reviews reviews;
+    
+    private Boolean loggedin;
 
     public Users(String usrname, String passwrd, String email) {
         this.username = usrname;

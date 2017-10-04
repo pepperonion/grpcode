@@ -44,6 +44,18 @@ public class Reviews implements Serializable {
     @JoinColumn(name="GamesTbl_idGamesTbl", nullable=false, updatable=false)
     private Games gameId;
 
+    public Reviews(String text, Users usrId, Games gameId) {
+        this.text = text;
+        this.usrId = usrId;
+        this.gameId = gameId;
+    }
+
+    public Reviews() {
+    }
+
+    
+    
+    
     public String getText() {
         return text;
     }
