@@ -17,6 +17,9 @@
 package com.sp.gprproject;
 
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,12 +29,14 @@ import javax.persistence.PersistenceUnit;
  *
  * @author Despoina
  */
+@DeclareRoles({"admin", "user"})
 public class ReviewsDAOImpl implements ReviewsDAO {
     
     @PersistenceUnit
     private static EntityManagerFactory factory; 
 
     @Override
+    @RolesAllowed("admin")
     public List<Reviews> getReviewsList() {
         
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
@@ -44,6 +49,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
     }
 
     @Override
+    @PermitAll
     public Reviews getReviewById(int rId) {
         
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
@@ -57,6 +63,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
     }
 
     @Override
+    @PermitAll
     public List<Reviews> getReviewsByUserID(int usrId) {
         
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
@@ -72,6 +79,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
     }
 
     @Override
+    @PermitAll
     public List<Reviews> getReviewsByGameId(int gameId) {
         
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
@@ -86,6 +94,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
     }
 
     @Override
+    @RolesAllowed("user")
     public void addReview(String text, Users userId, Games gameId) {
         
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
@@ -99,6 +108,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
     }
 
     @Override
+    @PermitAll
     public void deleteReview(int id) {
         
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
@@ -111,6 +121,7 @@ public class ReviewsDAOImpl implements ReviewsDAO {
     }
 
     @Override
+    @PermitAll
     public void updateReview(int id, String text, int gameId) {
         
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");

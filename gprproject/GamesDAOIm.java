@@ -7,6 +7,9 @@ package com.sp.gprproject;
 
 import java.util.Date;
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,12 +19,14 @@ import javax.persistence.PersistenceUnit;
  *
  * @author Despoina
  */
+
+@DeclareRoles({"admin", "user"})
 public class GamesDAOIm implements GamesDAO {
     
     @PersistenceUnit
     private static EntityManagerFactory factory; 
 
-    
+    @PermitAll
     public List<Games> getListOfGames() {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
@@ -38,6 +43,7 @@ public class GamesDAOIm implements GamesDAO {
     }
 
     @Override
+    @RolesAllowed("admin")
     public void updateListOfGames(int id, String title, String genre, Date date, String company) {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
@@ -54,6 +60,7 @@ public class GamesDAOIm implements GamesDAO {
     }
 
     @Override
+    @RolesAllowed("admin")
     public void deleteGame(int id) {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
@@ -69,6 +76,7 @@ public class GamesDAOIm implements GamesDAO {
     }
 
     @Override
+    @RolesAllowed("admin")
     public void addNewGame(String title, String genre, Date date, String company) {
                 
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
@@ -84,6 +92,7 @@ public class GamesDAOIm implements GamesDAO {
     }
 
     @Override
+    @PermitAll
     public List<Games> findGame(int id) {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         
