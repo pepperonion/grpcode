@@ -17,6 +17,9 @@
 package com.sp.gprproject;
 
 import java.util.List;
+import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,6 +29,7 @@ import javax.persistence.PersistenceUnit;
  *
  * @author Despoina
  */
+@DeclareRoles({"admin", "user"})
 public class UsersDAOImpl implements UsersDAO {
     @PersistenceUnit
     private static EntityManagerFactory factory; 
@@ -34,6 +38,7 @@ public class UsersDAOImpl implements UsersDAO {
     }
     
     @Override
+    @RolesAllowed("admin")
     public List<Users> getUsersList() {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
@@ -47,6 +52,7 @@ public class UsersDAOImpl implements UsersDAO {
     }
 
     @Override
+    @RolesAllowed("admin")
     public void addUser(String username, String pass, String email) {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
@@ -59,6 +65,7 @@ public class UsersDAOImpl implements UsersDAO {
     }
 
     @Override
+    @PermitAll
     public void deleteUser(int id) {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
@@ -72,6 +79,7 @@ public class UsersDAOImpl implements UsersDAO {
     }
 
     @Override
+    @PermitAll
     public void updateUserDetails(int id, String username, String pass, String email) {
         factory = Persistence.createEntityManagerFactory("com.sp_GPRproject_war_1.0PU");
         EntityManager em = factory.createEntityManager();
